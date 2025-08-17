@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Basketball Game Archive</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <h1>Basketball Game Archive</h1>
+
+  <h2>All Games</h2>
+  <ul id="gameList">
+    <li><a href="games/game1.html">Team A vs Team B</a></li>
+    <li><a href="games/game2.html">Team C vs Team D</a></li>
+    <li><a href="games/game3.html">Team E vs Team F</a></li>
+  </ul>
+
+  <h2>Search Games</h2>
+  <input type="text" id="searchBox" placeholder="Search team...">
+  <ul id="searchResults"></ul>
+
+  <script src="script.js"></script>
+</body>
+</html>
