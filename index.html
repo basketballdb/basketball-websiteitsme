@@ -4,22 +4,81 @@
   <meta charset="UTF-8">
   <title>Basketball Game Archive</title>
   <link rel="stylesheet" href="style.css">
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+    }
+    .game {
+      margin: 5px 0;
+      padding: 8px;
+      border-radius: 6px;
+      background: #f4f4f4;
+    }
+    .game a {
+      text-decoration: none;
+      color: #333;
+    }
+  </style>
 </head>
 <body>
   <h1>Basketball Game Archive</h1>
 
   <h2>All Games</h2>
   <ul id="gameList">
-    <li><a href="games/game1.html">Team A vs Team B</a></li>
-    <li><a href="games/game2.html">Poland vs Finland</a></li>
-    <li><a href="games/game3.html">Team E vs Team F</a></li>
+    <li><a href="games/game1.html" data-date="2025-08-15">Team A vs Team B</a></li>
+    <li><a href="games/game2.html" data-date="2025-08-17">Poland vs Finland</a></li>
+    <li><a href="games/game3.html" data-date="2025-08-18">Team E vs Team F</a></li>
   </ul>
 
   <h2>Search Games</h2>
   <input type="text" id="searchBox" placeholder="Search team...">
   <ul id="searchResults"></ul>
 
-  <script src="script.js"></script>
+  <h2>Find Games by Date</h2>
+  <input type="date" id="gameDate">
+  <ul id="dateResults"></ul>
+
+  <script>
+    // SEARCH FUNCTION
+    const searchBox = document.getElementById("searchBox");
+    const gameList = document.getElementById("gameList");
+    const searchResults = document.getElementById("searchResults");
+
+    searchBox.addEventListener("input", () => {
+      const query = searchBox.value.toLowerCase();
+      searchResults.innerHTML = "";
+      Array.from(gameList.getElementsByTagName("a")).forEach(link => {
+        if (link.textContent.toLowerCase().includes(query)) {
+          const li = document.createElement("li");
+          li.innerHTML = `<a href="${link.href}">${link.textContent}</a>`;
+          searchResults.appendChild(li);
+        }
+      });
+    });
+
+    // DATE PICKER FUNCTION
+    const gameDateInput = document.getElementById("gameDate");
+    const dateResults = document.getElementById("dateResults");
+
+    gameDateInput.addEventListener("change", () => {
+      const selectedDate = gameDateInput.value;
+      dateResults.innerHTML = "";
+
+      const matches = Array.from(gameList.getElementsByTagName("a")).filter(link => 
+        link.getAttribute("data-date") === selectedDate
+      );
+
+      if (matches.length === 0) {
+        dateResults.innerHTML = "<li>No games on this date.</li>";
+      } else {
+        matches.forEach(link => {
+          const li = document.createElement("li");
+          li.classList.add("game");
+          li.innerHTML = `<a href="${link.getAttribute("href")}">${link.textContent}</a>`;
+          dateResults.appendChild(li);
+        });
+      }
+    });
+  </script>
 </body>
 </html>
-
