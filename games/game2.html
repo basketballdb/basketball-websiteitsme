@@ -13,13 +13,12 @@
       width: 100%;
       font-family: Arial, sans-serif;
       background-color: #d4f4c4;
-      display: flex;
-      justify-content: center; /* centers the main content horizontally */
     }
 
     main {
       width: 90%;
       max-width: 1200px;
+      margin: 0 auto; /* centers the main content */
     }
 
     /* Competition logo in the top-right corner */
@@ -46,13 +45,13 @@
 
     .score {
       text-align: center;
+      font-size: 1.2em; /* base size for the text */
       font-weight: bold;
       margin-bottom: 20px;
-      font-size: 1.2em; /* base font size for text around numbers */
     }
 
-    .score .number {
-      font-size: 2em; /* bigger size for score numbers only */
+    .score span {
+      font-size: 2em; /* bigger numbers */
     }
 
     table {
@@ -104,7 +103,7 @@
     </div>
 
     <!-- Final Score -->
-    <p class="score"><span class="number">88</span> – <span class="number">97</span></p>
+    <p class="score"><span>88</span> – <span>97</span></p>
 
     <!-- Top Stats -->
     <h2>Statistics</h2>
