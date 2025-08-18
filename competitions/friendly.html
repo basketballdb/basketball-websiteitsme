@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>International Friendly</title>
+  <link rel="stylesheet" href="../style.css">
+</head>
+<body>
+  <h1>International Friendly</h1>
+
+  <!-- SEASON SELECTOR -->
+  <label for="seasonSelect">Select Season:</label>
+  <select id="seasonSelect">
+    <option value="2024">2024/25</option>
+    <option value="2025">2025/26</option>
+  </select>
+
+  <!-- Results -->
+  <ul id="seasonGames"></ul>
+
+  <!-- Hidden game list for this competition -->
+  <ul id="gameList" style="display:none;">
+    <li data-date="2024-08-10"><a href="../games/game2.html">Poland vs Finland</a></li>
+    <li data-date="2025-08-16"><a href="../games/game3.html">Latvia vs Slovenia</a></li>
+  </ul>
+
+  <script>
+    const allGames = Array.from(document.querySelectorAll("#gameList li"));
+    const seasonSelect = document.getElementById("seasonSelect");
+    const seasonGames = document.getElementById("seasonGames");
+
+    function filterBySeason(startYear) {
+      seasonGames.innerHTML = "";
+
+      // Define season range
+      const startDate = new Date(`${startYear}-08-02`); // Aug 2 of start year
+      const endDate = new Date(`${startYear + 1}-08-01`); // Aug 1 next year
+
+      allGames.forEach(game => {
+        const link = game.querySelector("a");
+        const gameDate = new Date(link.getAttribute("data-date"));
+
+        if (gameDate >= startDate && gameDate <= endDate) {
+          const li = document.createElement("li");
+          li.classList.add("game");
+          li.innerHTML = `<a href="${link.href}">${link.textContent} (${link.getAttribute("data-date")})</a>`;
+          seasonGames.appendChild(li);
+        }
+      });
+
+      if (seasonGames.innerHTML === "") {
+        seasonGames.innerHTML = "<li>No games in this season.</li>";
+      }
+    }
+
+    // Initial filter
+    filterBySeason(parseInt(seasonSelect.value));
+
+    // On season change
+    seasonSelect.addEventListener("change", () => {
+      filterBySeason(parseInt(seasonSelect.value));
+    });
+  </script>
+</body>
+</html>
