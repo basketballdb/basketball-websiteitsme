@@ -18,17 +18,39 @@
       text-decoration: none;
       color: #333;
     }
+    .competition {
+      margin: 5px 0;
+      padding: 6px 10px;
+      background: #cce5ff;
+      border-radius: 4px;
+      cursor: pointer;
+      display: inline-block;
+    }
+    .competition:hover {
+      background: #99ccff;
+    }
   </style>
 </head>
 <body>
   <h1>Basketball Game Archive</h1>
 
+  <!-- Competitions Section -->
+  <h2>Competitions</h2>
+  <div id="competitionList">
+    <span class="competition" data-competition="International Friendly">International Friendly</span>
+    <span class="competition" data-competition="EuroBasket Qualifiers">EuroBasket Qualifiers</span>
+    <span class="competition" data-competition="World Cup Qualifiers">World Cup Qualifiers</span>
+  </div>
+
   <h2>All Games</h2>
   <ul id="gameList">
-    <li><a href="games/game1.html" data-date="2025-08-15">Team A vs Team B</a></li>
-    <li><a href="games/game2.html" data-date="2025-08-17">Poland vs Finland</a></li>
-    <li><a href="games/game3.html" data-date="2025-08-18">Team E vs Team F</a></li>
+    <li data-competition="EuroBasket Qualifiers"><a href="games/game1.html" data-date="2025-08-15">Team A vs Team B</a></li>
+    <li data-competition="International Friendly"><a href="games/game2.html" data-date="2025-08-17">Poland vs Finland</a></li>
+    <li data-competition="World Cup Qualifiers"><a href="games/game3.html" data-date="2025-08-18">Team E vs Team F</a></li>
   </ul>
+
+  <h2>Games by Competition</h2>
+  <ul id="competitionResults"></ul>
 
   <h2>Search Games</h2>
   <input type="text" id="searchBox" placeholder="Search team...">
@@ -39,24 +61,50 @@
   <ul id="dateResults"></ul>
 
   <script>
-    // SEARCH FUNCTION
+    // --- COMPETITION FILTER ---
+    const competitionList = document.getElementById("competitionList");
+    const competitionResults = document.getElementById("competitionResults");
+    const allGames = Array.from(document.querySelectorAll("#gameList li"));
+
+    competitionList.addEventListener("click", (e) => {
+      if (e.target.classList.contains("competition")) {
+        const compName = e.target.getAttribute("data-competition");
+        competitionResults.innerHTML = "";
+
+        const matches = allGames.filter(game => game.getAttribute("data-competition") === compName);
+
+        if (matches.length === 0) {
+          competitionResults.innerHTML = "<li>No games in this competition.</li>";
+        } else {
+          matches.forEach(game => {
+            const li = document.createElement("li");
+            li.classList.add("game");
+            li.innerHTML = `<a href="${game.querySelector("a").href}">${game.querySelector("a").textContent}</a>`;
+            competitionResults.appendChild(li);
+          });
+        }
+      }
+    });
+
+    // --- SEARCH FUNCTION ---
     const searchBox = document.getElementById("searchBox");
-    const gameList = document.getElementById("gameList");
     const searchResults = document.getElementById("searchResults");
 
     searchBox.addEventListener("input", () => {
       const query = searchBox.value.toLowerCase();
       searchResults.innerHTML = "";
-      Array.from(gameList.getElementsByTagName("a")).forEach(link => {
+      allGames.forEach(game => {
+        const link = game.querySelector("a");
         if (link.textContent.toLowerCase().includes(query)) {
           const li = document.createElement("li");
+          li.classList.add("game");
           li.innerHTML = `<a href="${link.href}">${link.textContent}</a>`;
           searchResults.appendChild(li);
         }
       });
     });
 
-    // DATE PICKER FUNCTION
+    // --- DATE PICKER FUNCTION ---
     const gameDateInput = document.getElementById("gameDate");
     const dateResults = document.getElementById("dateResults");
 
@@ -64,17 +112,15 @@
       const selectedDate = gameDateInput.value;
       dateResults.innerHTML = "";
 
-      const matches = Array.from(gameList.getElementsByTagName("a")).filter(link => 
-        link.getAttribute("data-date") === selectedDate
-      );
+      const matches = allGames.filter(game => game.querySelector("a").getAttribute("data-date") === selectedDate);
 
       if (matches.length === 0) {
         dateResults.innerHTML = "<li>No games on this date.</li>";
       } else {
-        matches.forEach(link => {
+        matches.forEach(game => {
           const li = document.createElement("li");
           li.classList.add("game");
-          li.innerHTML = `<a href="${link.getAttribute("href")}">${link.textContent}</a>`;
+          li.innerHTML = `<a href="${game.querySelector("a").href}">${game.querySelector("a").textContent}</a>`;
           dateResults.appendChild(li);
         });
       }
