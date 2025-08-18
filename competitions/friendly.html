@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <title>International Friendly</title>
-  <link rel="stylesheet" href="../style.css">
+  <link rel="stylesheet" href="style.css">
   <style>
     body { font-family: Arial, sans-serif; padding: 20px; }
     .game { margin: 5px 0; padding: 8px; border-radius: 6px; background: #f4f4f4; }
@@ -25,6 +25,7 @@
 
   <!-- Hidden game list -->
   <ul id="gameList" style="display:none;">
+    <!-- paths fixed to root/games/ folder -->
     <li data-date="2025-08-16"><a href="games/game3.html">Latvia vs Slovenia</a></li>
     <li data-date="2025-08-17"><a href="games/game2.html">Poland vs Finland</a></li>
   </ul>
@@ -49,7 +50,7 @@
         if (gameDate.getFullYear() === year) {
           const li = document.createElement("li");
           li.classList.add("game");
-          li.innerHTML = `<a href="${link.href}">${link.textContent} (${link.getAttribute("data-date")})</a>`;
+          li.innerHTML = `<a href="${link.getAttribute("href")}">${link.textContent} (${link.getAttribute("data-date")})</a>`;
           yearGames.appendChild(li);
         }
       });
