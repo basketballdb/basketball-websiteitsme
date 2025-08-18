@@ -14,14 +14,12 @@
 
     /* Competition logo in the top-right corner */
     .competition-logo {
-  position: fixed;       /* fixed to viewport */
-  top: 10px;             /* distance from top */
-  right: 10px;           /* distance from right */
-  width: 120px;          /* adjust size */
-  height: auto;
-  z-index: 9999;         /* very high to stay above everything */
-  pointer-events: none;  /* optional: lets you click through the logo */
-}
+      position: fixed; /* stays in corner even when scrolling */
+      top: 10px;
+      right: 10px;
+      width: 120px; /* adjust size */
+      height: auto;
+      z-index: 100;
     }
 
     .team-logos {
@@ -31,33 +29,40 @@
       gap: 30px;
       margin: 20px 0;
     }
+
     .team-logos img {
       height: 80px;
     }
+
     .score {
       text-align: center;
       font-size: 1.5em;
       font-weight: bold;
       margin-bottom: 20px;
     }
+
     table {
       width: 100%;
       border-collapse: collapse;
       margin: 20px 0;
     }
+
     table, th, td {
       border: 1px solid #444;
     }
+
     th, td {
       padding: 8px;
       text-align: center;
     }
+
     th {
       background-color: #ddd;
     }
   </style>
 </head>
 <body>
+
   <!-- Competition Logo -->
   <img src="../images/Fibafriendly.png" alt="Competition Logo" class="competition-logo">
 
@@ -161,5 +166,6 @@
   </table>
 
   <a href="../index.html">Back to all games</a>
+
 </body>
 </html>
