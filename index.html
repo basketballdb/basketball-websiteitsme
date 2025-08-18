@@ -28,6 +28,8 @@
       border-radius: 4px;
       cursor: pointer;
       display: inline-block;
+      text-decoration: none;
+      color: #000;
     }
 
     .competition:hover {
@@ -47,9 +49,9 @@
   <!-- Competitions Slide -->
   <h2>Competitions</h2>
   <div id="competitionList">
-    <span class="competition" data-competition="International Friendly">International Friendly</span>
-    <span class="competition" data-competition="EuroBasket Qualifiers">EuroBasket Qualifiers</span>
-    <span class="competition" data-competition="World Cup Qualifiers">World Cup Qualifiers</span>
+    <a href="competitions/friendly.html" class="competition">International Friendly</a>
+    <a href="competitions/eurobasket.html" class="competition">EuroBasket Qualifiers</a>
+    <a href="competitions/worldcup.html" class="competition">World Cup Qualifiers</a>
   </div>
 
   <!-- Games by Competition -->
@@ -75,39 +77,11 @@
   <script>
     const allGames = Array.from(document.querySelectorAll("#gameList li"));
 
-    // --- COMPETITION FILTER ---
-    const competitionList = document.getElementById("competitionList");
     const competitionResults = document.getElementById("competitionResults");
     const searchResults = document.getElementById("searchResults");
     const dateResults = document.getElementById("dateResults");
     const searchBox = document.getElementById("searchBox");
     const gameDateInput = document.getElementById("gameDate");
-
-    competitionList.addEventListener("click", (e) => {
-      if (e.target.classList.contains("competition")) {
-        const compName = e.target.getAttribute("data-competition");
-        competitionResults.innerHTML = "";
-        searchResults.innerHTML = ""; // clear search results
-        dateResults.innerHTML = "";   // clear date results
-        searchBox.value = "";         // clear search box
-        gameDateInput.value = "";     // clear date picker
-
-        const matches = allGames.filter(game => game.getAttribute("data-competition") === compName);
-
-        if (matches.length === 0) {
-          competitionResults.innerHTML = "<li>No games in this competition.</li>";
-        } else {
-          matches.forEach(game => {
-            const li = document.createElement("li");
-            li.classList.add("game");
-            li.innerHTML = `<a href="${game.querySelector("a").href}">${game.querySelector("a").textContent}</a>`;
-            competitionResults.appendChild(li);
-          });
-        }
-
-        competitionResults.scrollIntoView({ behavior: "smooth" });
-      }
-    });
 
     // --- SEARCH FUNCTION ---
     searchBox.addEventListener("input", () => {
@@ -154,5 +128,3 @@
   </script>
 </body>
 </html>
-
-
