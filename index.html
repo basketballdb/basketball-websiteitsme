@@ -46,7 +46,17 @@
   <h2>Games</h2>
   <ul id="competitionResults"></ul>
 
-  <!-- Hidden master list of games (used for filtering, not shown initially) -->
+  <!-- SEARCH SECTION -->
+  <h2>Search Games</h2>
+  <input type="text" id="searchBox" placeholder="Search team...">
+  <ul id="searchResults"></ul>
+
+  <!-- DATE PICKER SECTION -->
+  <h2>Find Games by Date</h2>
+  <input type="date" id="gameDate">
+  <ul id="dateResults"></ul>
+
+  <!-- Hidden master list of games -->
   <ul id="gameList" style="display:none;">
     <li data-competition="EuroBasket Qualifiers"><a href="games/game1.html" data-date="2025-08-15">Team A vs Team B</a></li>
     <li data-competition="International Friendly"><a href="games/game2.html" data-date="2025-08-17">Poland vs Finland</a></li>
@@ -54,10 +64,11 @@
   </ul>
 
   <script>
+    const allGames = Array.from(document.querySelectorAll("#gameList li"));
+
     // --- COMPETITION FILTER ---
     const competitionList = document.getElementById("competitionList");
     const competitionResults = document.getElementById("competitionResults");
-    const allGames = Array.from(document.querySelectorAll("#gameList li"));
 
     competitionList.addEventListener("click", (e) => {
       if (e.target.classList.contains("competition")) {
@@ -77,8 +88,47 @@
           });
         }
 
-        // Scroll to results after click (optional)
         competitionResults.scrollIntoView({ behavior: "smooth" });
+      }
+    });
+
+    // --- SEARCH FUNCTION ---
+    const searchBox = document.getElementById("searchBox");
+    const searchResults = document.getElementById("searchResults");
+
+    searchBox.addEventListener("input", () => {
+      const query = searchBox.value.toLowerCase();
+      searchResults.innerHTML = "";
+      allGames.forEach(game => {
+        const link = game.querySelector("a");
+        if (link.textContent.toLowerCase().includes(query)) {
+          const li = document.createElement("li");
+          li.classList.add("game");
+          li.innerHTML = `<a href="${link.href}">${link.textContent}</a>`;
+          searchResults.appendChild(li);
+        }
+      });
+    });
+
+    // --- DATE PICKER FUNCTION ---
+    const gameDateInput = document.getElementById("gameDate");
+    const dateResults = document.getElementById("dateResults");
+
+    gameDateInput.addEventListener("change", () => {
+      const selectedDate = gameDateInput.value;
+      dateResults.innerHTML = "";
+
+      const matches = allGames.filter(game => game.querySelector("a").getAttribute("data-date") === selectedDate);
+
+      if (matches.length === 0) {
+        dateResults.innerHTML = "<li>No games on this date.</li>";
+      } else {
+        matches.forEach(game => {
+          const li = document.createElement("li");
+          li.classList.add("game");
+          li.innerHTML = `<a href="${game.querySelector("a").href}">${game.querySelector("a").textContent}</a>`;
+          dateResults.appendChild(li);
+        });
       }
     });
   </script>
