@@ -5,24 +5,10 @@
   <title>International Friendly</title>
   <link rel="stylesheet" href="../style.css">
   <style>
-    body {
-      font-family: Arial, sans-serif;
-      padding: 20px;
-    }
-    .game {
-      margin: 5px 0;
-      padding: 8px;
-      border-radius: 6px;
-      background: #f4f4f4;
-    }
-    .game a {
-      text-decoration: none;
-      color: #333;
-    }
-    select {
-      padding: 6px;
-      margin-bottom: 15px;
-    }
+    body { font-family: Arial, sans-serif; padding: 20px; }
+    .game { margin: 5px 0; padding: 8px; border-radius: 6px; background: #f4f4f4; }
+    .game a { text-decoration: none; color: #333; }
+    select { padding: 6px; margin-bottom: 15px; }
   </style>
 </head>
 <body>
@@ -38,14 +24,11 @@
   <!-- Results -->
   <ul id="seasonGames"></ul>
 
-  <!-- Hidden game list for this competition -->
+  <!-- Hidden game list -->
   <ul id="gameList" style="display:none;">
-    <!-- 2024/25 games -->
-    <li data-date="2024-08-10"><a href="../games/game1.html">Some Game 2024</a></li>
-
     <!-- 2025/26 games -->
-    <li data-date="2025-08-16"><a href="../games/game3.html">Latvia vs Slovenia</a></li>
-    <li data-date="2025-08-17"><a href="../games/game2.html">Poland vs Finland</a></li>
+    <li data-date="2025-08-16"><a href="games/game3.html">Latvia vs Slovenia</a></li>
+    <li data-date="2025-08-17"><a href="games/game2.html">Poland vs Finland</a></li>
   </ul>
 
   <script>
@@ -56,13 +39,11 @@
     function filterBySeason(startYear) {
       seasonGames.innerHTML = "";
 
-      // Define season range: Aug 2 startYear → Aug 1 nextYear
-      const startDate = new Date(startYear, 7, 2); // August = 7
-      const endDate = new Date(startYear + 1, 7, 1);
+      const startDate = new Date(startYear, 7, 2); // Aug 2
+      const endDate = new Date(startYear + 1, 7, 1); // Aug 1 next year
 
       allGames.forEach(game => {
         const link = game.querySelector("a");
-        // Parse date safely using local midnight
         const gameDate = new Date(link.getAttribute("data-date") + "T00:00:00");
 
         if (gameDate >= startDate && gameDate <= endDate) {
