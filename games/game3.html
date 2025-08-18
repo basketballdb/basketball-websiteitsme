@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Poland vs. Finland</title>
+  <link rel="stylesheet" href="../style.css">
+  <style>
+    /* Light green background for the page */
+    body {
+      margin: 0;
+      padding: 0;
+      width: 100%;
+      font-family: Arial, sans-serif;
+      position: relative;
+      display: flex;
+      justify-content: center; /* centers the main content */
+      background-color: #d4f4c4;
+    }
+
+    main {
+      width: 90%;
+      max-width: 1200px;
+    }
+
+    /* Competition logo in the top-right corner */
+    .competition-logo {
+      position: fixed; /* stays in corner even when scrolling */
+      top: 10px;
+      right: 10px;
+      width: 120px; /* adjust size */
+      height: auto;
+      z-index: 100;
+    }
+
+    .team-logos {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 30px;
+      margin: 20px 0;
+    }
+
+    .team-logos img {
+      height: 80px;
+    }
+
+    .score {
+      text-align: center;
+      font-size: 1.5em;
+      font-weight: bold;
+      margin-bottom: 20px;
+    }
+
+    /* ONLY change: make the score numbers bigger */
+    .score-number {
+      font-size: 2.5em; /* bigger font for the numbers */
+      font-weight: bold;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 20px 0;
+    }
+
+    table, th, td {
+      border: 1px solid #444;
+    }
+
+    th, td {
+      padding: 8px;
+      text-align: center;
+    }
+
+    th {
+      background-color: #ddd;
+    }
+
+    a.back-link {
+      display: inline-block;
+      margin: 20px 0;
+      text-decoration: none;
+      color: #333;
+      font-weight: bold;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Competition Logo -->
+  <img src="../images/Fibafriendly.png" alt="Competition Logo" class="competition-logo">
+
+  <main>
+    <h1>Poland vs Finland</h1>
+    <p>Date: 17. August 2025</p>
+    <p>International Friendly</p>
+
+    <!-- Logos -->
+    <div class="team-logos">
+      <div>
+        <img src="../images/Poland.png" alt="Team1Logo">
+      </div>
+      <div>
+        <img src="../images/Finland.png" alt="Team2Logo">
+      </div>
+    </div>
+
+    <!-- Final Score -->
+    <p class="score">POLAND <span class="score-number">88 – 97</span> FINLAND</p>
+
+    <!-- Top Stats -->
+    <h2>Statistics</h2>
+    <ul>
+      <li>TOP SCORER: Lauri MARKKANEN (42)</li>
+      <li>REBOUNDS: Lauri MARKKNANEN (12)</li>
+      <li>ASSISTS: Andrzej PLUTA (6)</li>
+      <li>RATING: Lauri MARKKANEN (10)</li>
+    </ul>
+
+    <!-- Full Stats Team A -->
+    <h2>POLAND Stats</h2>
+    <table>
+      <tr>
+        <th>Player</th>
+        <th>Points</th>
+        <th>Rebounds</th>
+        <th>Assists</th>
+        <th>Rating</th>
+      </tr>
+      <tr>
+        <td>Aleksander BALCEROWSKI</td>
+        <td>17</td>
+        <td>4</td>
+        <td>0</td>
+        <td>6.7</td>
+      </tr>
+      <tr>
+        <td>Mateusz PONITKA</td>
+        <td>12</td>
+        <td>5</td>
+        <td>5</td>
+        <td>7.1</td>
+      </tr>
+      <tr>
+        <td>Dominik OLEJNICZAK</td>
+        <td>11</td>
+        <td>6</td>
+        <td>0</td>
+        <td>6.7</td>
+      </tr>
+      <tr>
+        <td>Przemyslaw ZOLNIEREWICZ</td>
+        <td>11</td>
+        <td>1</td>
+        <td>0</td>
+        <td>6.4</td>
+      </tr>
+    </table>
+
+    <!-- Full Stats Team B -->
+    <h2>FINLAND Stats</h2>
+    <table>
+      <tr>
+        <th>Player</th>
+        <th>Points</th>
+        <th>Rebounds</th>
+        <th>Assists</th>
+        <th>Rating</th>
+      </tr>
+      <tr>
+        <td>Lauri MARKKANEN</td>
+        <td>42</td>
+        <td>12</td>
+        <td>0</td>
+        <td>10</td>
+      </tr>
+      <tr>
+        <td>Olivier NKAMHOUA</td>
+        <td>12</td>
+        <td>5</td>
+        <td>4</td>
+        <td>7.4</td>
+      </tr>
+      <tr>
+        <td>Sasu SALIN</td>
+        <td>11</td>
+        <td>0</td>
+        <td>4</td>
+        <td>6.9</td>
+      </tr>
+    </table>
+
+    <a href="../index.html" class="back-link">Back to all games</a>
+  </main>
+
+</body>
+</html>
