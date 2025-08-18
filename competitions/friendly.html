@@ -14,14 +14,16 @@
 <body>
   <h1>International Friendly</h1>
 
-  <label for="seasonSelect">Select Season:</label>
-  <select id="seasonSelect">
-    <option value="2024">2024/25</option>
-    <option value="2025">2025/26</option>
+  <!-- YEAR SELECTOR -->
+  <label for="yearSelect">Select Year:</label>
+  <select id="yearSelect">
+    <option value="2024">2024</option>
+    <option value="2025">2025</option>
   </select>
 
-  <ul id="seasonGames"></ul>
+  <ul id="yearGames"></ul>
 
+  <!-- Hidden game list -->
   <ul id="gameList" style="display:none;">
     <li data-date="2025-08-16"><a href="games/game3.html">Latvia vs Slovenia</a></li>
     <li data-date="2025-08-17"><a href="games/game2.html">Poland vs Finland</a></li>
@@ -29,43 +31,40 @@
 
   <script>
     const allGames = Array.from(document.querySelectorAll("#gameList li"));
-    const seasonSelect = document.getElementById("seasonSelect");
-    const seasonGames = document.getElementById("seasonGames");
+    const yearSelect = document.getElementById("yearSelect");
+    const yearGames = document.getElementById("yearGames");
 
     function parseDate(dateStr) {
       const [year, month, day] = dateStr.split("-");
       return new Date(year, month - 1, day);
     }
 
-    function filterBySeason(startYear) {
-      seasonGames.innerHTML = "";
-
-      const startDate = new Date(startYear, 7, 2); // Aug 2
-      const endDate = new Date(startYear + 1, 7, 1); // Aug 1 next year
+    function filterByYear(year) {
+      yearGames.innerHTML = "";
 
       allGames.forEach(game => {
         const link = game.querySelector("a");
         const gameDate = parseDate(link.getAttribute("data-date"));
 
-        if (gameDate >= startDate && gameDate <= endDate) {
+        if (gameDate.getFullYear() === year) {
           const li = document.createElement("li");
           li.classList.add("game");
           li.innerHTML = `<a href="${link.href}">${link.textContent} (${link.getAttribute("data-date")})</a>`;
-          seasonGames.appendChild(li);
+          yearGames.appendChild(li);
         }
       });
 
-      if (seasonGames.innerHTML === "") {
-        seasonGames.innerHTML = "<li>No games in this season.</li>";
+      if (yearGames.innerHTML === "") {
+        yearGames.innerHTML = "<li>No games in this year.</li>";
       }
     }
 
     // Initial filter
-    filterBySeason(parseInt(seasonSelect.value));
+    filterByYear(parseInt(yearSelect.value));
 
-    // Update when season changes
-    seasonSelect.addEventListener("change", () => {
-      filterBySeason(parseInt(seasonSelect.value));
+    // Update when year changes
+    yearSelect.addEventListener("change", () => {
+      filterByYear(parseInt(yearSelect.value));
     });
   </script>
 </body>
