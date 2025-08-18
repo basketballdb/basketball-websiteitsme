@@ -5,6 +5,23 @@
   <title>Poland vs. Finland</title>
   <link rel="stylesheet" href="../style.css">
   <style>
+    /* Light green background for the page */
+    body {
+      background-color: #d4f4c4; /* light green */
+      font-family: Arial, sans-serif;
+      position: relative;
+    }
+
+    /* Competition logo in the top-right corner */
+    .competition-logo {
+      position: fixed; /* stays in corner even when scrolling */
+      top: 10px;
+      right: 10px;
+      width: 120px; /* adjust size */
+      height: auto;
+      z-index: 100;
+    }
+
     .team-logos {
       display: flex;
       justify-content: center;
@@ -39,6 +56,9 @@
   </style>
 </head>
 <body>
+  <!-- Competition Logo -->
+  <img src="../images/competition.png" alt="Competition Logo" class="competition-logo">
+
   <h1>Poland vs Finland</h1>
   <p>Date: 17. August 2025</p>
   <p>International Friendly</p>
