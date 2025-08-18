@@ -42,6 +42,7 @@
   <ul id="gameList" style="display:none;">
     <li data-date="2024-08-10"><a href="../games/game2.html">Poland vs Finland</a></li>
     <li data-date="2025-08-16"><a href="../games/game3.html">Latvia vs Slovenia</a></li>
+    <li data-date="2025-08-17"><a href="../games/game4.html">Spain vs Italy</a></li>
   </ul>
 
   <script>
@@ -53,13 +54,16 @@
       seasonGames.innerHTML = "";
 
       // Define season range: Aug 2 startYear → Aug 1 nextYear
-      const startDate = new Date(startYear, 7, 2); // Month is 0-indexed: August = 7
+      const startDate = new Date(startYear, 7, 2); // August = 7
       const endDate = new Date(startYear + 1, 7, 1);
 
       allGames.forEach(game => {
         const link = game.querySelector("a");
-        const dateParts = link.getAttribute("data-date").split("-");
-        const gameDate = new Date(dateParts[0], dateParts[1] - 1, dateParts[2]);
+        // Parse date safely using local midnight
+        const gameDate = new Date(link.getAttribute("data-date") + "T00:00:00");
+
+        // Debug log (remove if desired)
+        console.log("Game:", link.textContent, "Date:", gameDate, "Season:", startDate, "-", endDate);
 
         if (gameDate >= startDate && gameDate <= endDate) {
           const li = document.createElement("li");
