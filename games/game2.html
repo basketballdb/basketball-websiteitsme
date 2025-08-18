@@ -12,16 +12,13 @@
       padding: 0;
       width: 100%;
       font-family: Arial, sans-serif;
-      position: relative;
-      display: flex;
-      justify-content: column; /* centers the main content */
       background-color: #d4f4c4;
     }
 
     main {
       width: 90%;
       max-width: 1200px;
-      margin: 0 auto; /* centers the main content horizontally */
+      margin: 0 auto; /* centers the main content */
     }
 
     /* Competition logo in the top-right corner */
@@ -48,14 +45,13 @@
 
     .score {
       text-align: center;
-      font-size: 1.5em;
+      font-size: 1.2em; /* base size for the text */
       font-weight: bold;
       margin-bottom: 20px;
     }
 
-    .score-number {
-      font-size: 2.5em; /* bigger font for the numbers */
-      font-weight: bold;
+    .score span {
+      font-size: 2em; /* bigger numbers */
     }
 
     table {
@@ -107,7 +103,7 @@
     </div>
 
     <!-- Final Score -->
-    <p class="score">POLAND <span class="score-number">88 – 97</span> FINLAND</p>
+    <p class="score"><span>88</span> – <span>97</span></p>
 
     <!-- Top Stats -->
     <h2>Statistics</h2>
