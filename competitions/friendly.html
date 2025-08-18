@@ -40,9 +40,12 @@
 
   <!-- Hidden game list for this competition -->
   <ul id="gameList" style="display:none;">
-    <li data-date="2024-08-10"><a href="../games/game2.html">Poland vs Finland</a></li>
+    <!-- 2024/25 games -->
+    <li data-date="2024-08-10"><a href="../games/game1.html">Some Game 2024</a></li>
+
+    <!-- 2025/26 games -->
     <li data-date="2025-08-16"><a href="../games/game3.html">Latvia vs Slovenia</a></li>
-    <li data-date="2025-08-17"><a href="../games/game4.html">Spain vs Italy</a></li>
+    <li data-date="2025-08-17"><a href="../games/game2.html">Poland vs Finland</a></li>
   </ul>
 
   <script>
@@ -61,9 +64,6 @@
         const link = game.querySelector("a");
         // Parse date safely using local midnight
         const gameDate = new Date(link.getAttribute("data-date") + "T00:00:00");
-
-        // Debug log (remove if desired)
-        console.log("Game:", link.textContent, "Date:", gameDate, "Season:", startDate, "-", endDate);
 
         if (gameDate >= startDate && gameDate <= endDate) {
           const li = document.createElement("li");
