@@ -45,12 +45,12 @@
 
       allGames.forEach(game => {
         const link = game.querySelector("a");
-        const gameDate = parseDate(link.getAttribute("data-date"));
+        const gameDate = parseDate(game.getAttribute("data-date")); // ✅ FIX
 
         if (gameDate.getFullYear() === year) {
           const li = document.createElement("li");
           li.classList.add("game");
-          li.innerHTML = `<a href="${link.getAttribute("href")}">${link.textContent} (${link.getAttribute("data-date")})</a>`;
+          li.innerHTML = `<a href="${link.getAttribute("href")}">${link.textContent} (${game.getAttribute("data-date")})</a>`;
           yearGames.appendChild(li);
         }
       });
