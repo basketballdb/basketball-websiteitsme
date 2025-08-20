@@ -20,68 +20,142 @@ h1, h2 {
   display: flex;
   justify-content: center;
   align-items: center;
-  margin-bottom: 20px;
+  flex-wrap: wrap;
   gap: 10px;
+  margin-bottom: 20px;
 }
 
-label {
+.filter-section label {
   font-weight: bold;
 }
 
-select {
+.filter-section select,
+.filter-section input {
   padding: 6px 10px;
   font-size: 14px;
+  border-radius: 4px;
+  border: 1px solid #ccc;
 }
 
-/* Game List */
-ul {
-  list-style: none;
-  padding: 0;
-  margin: 0;
+/* Search Section */
+.search-container {
+  max-width: 600px;
+  margin: 0 auto 20px auto;
+  text-align: center;
 }
 
-li {
-  margin: 12px 0;
-  padding: 12px;
+.search-container input {
+  width: 70%;
+  padding: 8px;
+  border-radius: 4px;
+  border: 1px solid #ccc;
+}
+
+.search-container button {
+  padding: 8px 12px;
+  margin-left: 5px;
+  border-radius: 4px;
+  border: none;
+  background-color: #0077cc;
+  color: white;
+  cursor: pointer;
+}
+
+.search-container button:hover {
+  background-color: #005fa3;
+}
+
+/* Game List Cards */
+.game-list, .search-results {
   background: #fff;
   border-radius: 8px;
+  padding: 20px;
+  margin: 20px auto;
   box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+  max-width: 800px;
+}
+
+.game-list h2, .search-results h2 {
+  margin-top: 0;
+}
+
+/* Individual Game Item */
+li.game-item {
   display: flex;
   align-items: center;
   justify-content: space-between;
+  padding: 10px;
+  margin: 10px 0;
+  border-radius: 6px;
+  background-color: #f9f9f9;
+  border: 1px solid #ddd;
 }
 
-/* Game Links */
-a {
-  text-decoration: none;
+li.game-item a {
   color: #0077cc;
   font-weight: bold;
+  text-decoration: none;
 }
 
-a:hover {
+li.game-item a:hover {
   text-decoration: underline;
 }
 
 /* Competition Logo */
 .competition-logo {
   height: 40px;
+  width: auto;
   margin-right: 15px;
 }
 
-/* Teams + Score Section */
+/* Teams + Score inside a game-item */
 .game-info {
   display: flex;
   align-items: center;
   gap: 10px;
+  flex-wrap: wrap;
 }
 
-/* Input / Search Fields */
-input {
-  width: 100%;
-  padding: 8px;
-  margin-top: 5px;
-  margin-bottom: 15px;
-  box-sizing: border-box;
-  border-radius: 4px;
-  border: 1px solid #ccc;
+/* Responsive adjustments */
+@media screen and (max-width: 600px) {
+  .filter-section {
+    flex-direction: column;
+  }
+  .game-info {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+  .search-container input {
+    width: 100%;
+    margin-bottom: 10px;
+  }
+  .search-container button {
+    width: 100%;
+  }
 }
+HTML structure example (for index.html or a game list section)
+html
+Kopieren
+Bearbeiten
+<div class="filter-section">
+  <label for="gameDate">Select Date:</label>
+  <input type="date" id="gameDate">
+</div>
+
+<ul class="game-list" id="dateResults">
+  <li class="game-item">
+    <div class="game-info">
+      <img class="competition-logo" src="images/Fibafriendly.png" alt="Friendly">
+      <span>Poland vs Finland</span>
+    </div>
+    <span>78 - 70</span>
+  </li>
+
+  <li class="game-item">
+    <div class="game-info">
+      <img class="competition-logo" src="images/Fibafriendly.png" alt="Friendly">
+      <span>Slovenia vs Great Britain</span>
+    </div>
+    <span>85 - 81</span>
+  </li>
+</ul>
