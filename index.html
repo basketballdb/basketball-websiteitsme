@@ -2,162 +2,150 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>Basketball Game Archive</title>
+  <title>Basketball Database</title>
   <link rel="stylesheet" href="style.css">
   <style>
     body {
       font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+      background-color: #f8f8f8;
     }
 
-    .game {
-      margin: 5px 0;
-      padding: 8px;
-      border-radius: 6px;
-      background: #f4f4f4;
+    header {
+      background-color: #222;
+      color: #fff;
+      padding: 20px;
+      text-align: center;
     }
 
-    .game a {
-      text-decoration: none;
-      color: #333;
+    .search-container {
+      margin: 20px auto;
+      max-width: 600px;
+      text-align: center;
     }
 
-    .competition {
-      margin: 5px 0;
-      padding: 6px 10px;
-      background: #cce5ff;
-      border-radius: 4px;
+    .search-container input {
+      width: 70%;
+      padding: 10px;
+      border-radius: 5px;
+      border: 1px solid #ccc;
+    }
+
+    .search-container button {
+      padding: 10px 15px;
+      border: none;
+      background-color: #444;
+      color: white;
+      border-radius: 5px;
       cursor: pointer;
-      display: inline-block;
+    }
+
+    .search-results {
+      margin: 20px auto;
+      max-width: 800px;
+      background: #fff;
+      border-radius: 8px;
+      padding: 20px;
+      box-shadow: 0px 0px 10px rgba(0,0,0,0.1);
+    }
+
+    .game-list {
+      margin: 20px auto;
+      max-width: 800px;
+      background: #fff;
+      border-radius: 8px;
+      padding: 20px;
+      box-shadow: 0px 0px 10px rgba(0,0,0,0.1);
+    }
+
+    .game-list h2 {
+      margin-top: 0;
+    }
+
+    .game-item {
+      padding: 10px;
+      border-bottom: 1px solid #ddd;
+    }
+
+    .game-item:last-child {
+      border-bottom: none;
+    }
+
+    a {
+      color: #0066cc;
       text-decoration: none;
-      color: #000;
     }
 
-    .competition:hover {
-      background: #99ccff;
-    }
-
-    input {
-      padding: 6px;
-      margin: 4px 0;
-      width: 250px;
-    }
-
-    /* Competition headers for grouped results */
-    .competition-header {
-      margin-top: 15px;
-      padding: 8px 12px;
-      background: #e0eaff;
-      border-left: 5px solid #99ccff;
-      border-radius: 4px;
-      font-weight: bold;
+    a:hover {
+      text-decoration: underline;
     }
   </style>
 </head>
 <body>
-  <h1>Basketball Game Archive</h1>
+  <header>
+    <h1>🏀 Basketball Database</h1>
+    <p>Explore Teams, Players & Competitions</p>
+  </header>
 
-  <!-- Competitions Slide -->
-  <h2>Competitions</h2>
-  <div id="competitionList">
-    <a href="competitions/friendly.html" class="competition">International Friendly</a>
-    <a href="competitions/eurobasket.html" class="competition">EuroBasket Qualifiers</a>
-    <a href="competitions/worldcup.html" class="competition">World Cup Qualifiers</a>
+  <div class="search-container">
+    <input type="text" id="searchInput" placeholder="Search for teams, players, or competitions...">
+    <button onclick="performSearch()">Search</button>
   </div>
 
-  <!-- Games by Competition -->
-  <h2>Games</h2>
-  <ul id="competitionResults"></ul>
+  <div id="searchResults" class="search-results" style="display:none;">
+    <h2>Search Results</h2>
+    <ul id="resultsList"></ul>
+  </div>
 
-  <!-- SEARCH SECTION -->
-  <h2>Search Games</h2>
-  <input type="text" id="searchBox" placeholder="Search team...">
-  <ul id="searchResults"></ul>
-
-  <!-- DATE PICKER SECTION -->
-  <h2>Find Games by Date</h2>
-  <input type="date" id="gameDate">
-  <div id="dateResults"></div>
-
-  <!-- Hidden master list of games -->
-  <ul id="gameList" style="display:none;">
-    <li data-competition="International Friendly"><a href="games/game2.html" data-date="2025-08-17">Poland vs Finland</a></li>
-    <li data-competition="International Friendly"><a href="games/game3.html" data-date="2025-08-16">Latvia vs Slovenia</a></li>
-    <li data-competition="International Friendly"><a href="games/game4.html" data-date="2025-08-19">Slovenia vs Great Britain</a></li>
-  </ul>
+  <div class="game-list">
+    <h2>Latest Games</h2>
+    <div class="game-item"><a href="games/game1.html">Poland vs Finland - Friendly 2025</a></div>
+    <div class="game-item"><a href="games/game2.html">Slovenia vs Great Britain - Friendly 2025</a></div>
+    <!-- Add more dynamically later -->
+  </div>
 
   <script>
-    const allGames = Array.from(document.querySelectorAll("#gameList li"));
+    const data = {
+      teams: [
+        { name: "Poland", url: "Poland.html" },
+        { name: "Finland", url: "Finland.html" },
+        { name: "Slovenia", url: "Slovenia.html" },
+        { name: "Great Britain", url: "Great_Britain.html" }
+      ],
+      players: [
+        { name: "Aleksander Balcerowski", url: "Aleksander_Balcerowski.html" },
+        { name: "Lauri Markkanen", url: "Lauri_Markkanen.html" }
+      ],
+      competitions: [
+        { name: "FIBA Friendly", url: "competitions/Fibafriendly.html" }
+      ]
+    };
 
-    const competitionResults = document.getElementById("competitionResults");
-    const searchResults = document.getElementById("searchResults");
-    const dateResults = document.getElementById("dateResults");
-    const searchBox = document.getElementById("searchBox");
-    const gameDateInput = document.getElementById("gameDate");
+    function performSearch() {
+      const input = document.getElementById("searchInput").value.toLowerCase();
+      const resultsList = document.getElementById("resultsList");
+      const searchResults = document.getElementById("searchResults");
 
-    // --- SEARCH FUNCTION ---
-    searchBox.addEventListener("input", () => {
-      const query = searchBox.value.toLowerCase();
-      searchResults.innerHTML = "";
-      competitionResults.innerHTML = ""; // hide competition results while searching
-      dateResults.innerHTML = "";        // hide date results while searching
-      gameDateInput.value = "";          // reset date picker
+      resultsList.innerHTML = "";
+      let found = false;
 
-      if (query === "") return; // no results when empty
-
-      allGames.forEach(game => {
-        const link = game.querySelector("a");
-        if (link.textContent.toLowerCase().includes(query)) {
-          const li = document.createElement("li");
-          li.classList.add("game");
-          li.innerHTML = `<a href="${link.href}">${link.textContent}</a>`;
-          searchResults.appendChild(li);
-        }
-      });
-    });
-
-    // --- DATE PICKER FUNCTION ---
-    gameDateInput.addEventListener("change", () => {
-      const selectedDate = gameDateInput.value;
-      dateResults.innerHTML = "";
-      searchResults.innerHTML = "";       // hide search results
-      competitionResults.innerHTML = "";  // hide competition results
-      searchBox.value = "";               // reset search box
-
-      const matches = allGames.filter(
-        game => game.querySelector("a").getAttribute("data-date") === selectedDate
-      );
-
-      if (matches.length === 0) {
-        dateResults.innerHTML = "<p>No games on this date.</p>";
-        return;
-      }
-
-      // group by competition
-      const grouped = {};
-      matches.forEach(game => {
-        const competition = game.getAttribute("data-competition");
-        if (!grouped[competition]) grouped[competition] = [];
-        grouped[competition].push(game);
-      });
-
-      // build HTML grouped by competition
-      for (const competition in grouped) {
-        const compHeader = document.createElement("div");
-        compHeader.classList.add("competition-header");
-        compHeader.textContent = competition;
-        dateResults.appendChild(compHeader);
-
-        const ul = document.createElement("ul");
-        grouped[competition].forEach(game => {
-          const link = game.querySelector("a");
-          const li = document.createElement("li");
-          li.classList.add("game");
-          li.innerHTML = `<a href="${link.href}">${link.textContent}</a>`;
-          ul.appendChild(li);
+      ["teams", "players", "competitions"].forEach(category => {
+        data[category].forEach(item => {
+          if (item.name.toLowerCase().includes(input)) {
+            const li = document.createElement("li");
+            const link = document.createElement("a");
+            link.href = item.url;
+            link.textContent = `${item.name} (${category})`;
+            li.appendChild(link);
+            resultsList.appendChild(li);
+            found = true;
+          }
         });
-        dateResults.appendChild(ul);
-      }
-    });
+      });
+
+      searchResults.style.display = found ? "block" : "none";
+    }
   </script>
 </body>
 </html>
