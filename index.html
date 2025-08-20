@@ -41,6 +41,16 @@
       margin: 4px 0;
       width: 250px;
     }
+
+    /* Competition headers for grouped results */
+    .competition-header {
+      margin-top: 15px;
+      padding: 8px 12px;
+      background: #e0eaff;
+      border-left: 5px solid #99ccff;
+      border-radius: 4px;
+      font-weight: bold;
+    }
   </style>
 </head>
 <body>
@@ -66,7 +76,7 @@
   <!-- DATE PICKER SECTION -->
   <h2>Find Games by Date</h2>
   <input type="date" id="gameDate">
-  <ul id="dateResults"></ul>
+  <div id="dateResults"></div>
 
   <!-- Hidden master list of games -->
   <ul id="gameList" style="display:none;">
@@ -113,20 +123,41 @@
       competitionResults.innerHTML = "";  // hide competition results
       searchBox.value = "";               // reset search box
 
-      const matches = allGames.filter(game => game.querySelector("a").getAttribute("data-date") === selectedDate);
+      const matches = allGames.filter(
+        game => game.querySelector("a").getAttribute("data-date") === selectedDate
+      );
 
       if (matches.length === 0) {
-        dateResults.innerHTML = "<li>No games on this date.</li>";
-      } else {
-        matches.forEach(game => {
+        dateResults.innerHTML = "<p>No games on this date.</p>";
+        return;
+      }
+
+      // group by competition
+      const grouped = {};
+      matches.forEach(game => {
+        const competition = game.getAttribute("data-competition");
+        if (!grouped[competition]) grouped[competition] = [];
+        grouped[competition].push(game);
+      });
+
+      // build HTML grouped by competition
+      for (const competition in grouped) {
+        const compHeader = document.createElement("div");
+        compHeader.classList.add("competition-header");
+        compHeader.textContent = competition;
+        dateResults.appendChild(compHeader);
+
+        const ul = document.createElement("ul");
+        grouped[competition].forEach(game => {
+          const link = game.querySelector("a");
           const li = document.createElement("li");
           li.classList.add("game");
-          li.innerHTML = `<a href="${game.querySelector("a").href}">${game.querySelector("a").textContent}</a>`;
-          dateResults.appendChild(li);
+          li.innerHTML = `<a href="${link.href}">${link.textContent}</a>`;
+          ul.appendChild(li);
         });
+        dateResults.appendChild(ul);
       }
     });
   </script>
 </body>
 </html>
-
