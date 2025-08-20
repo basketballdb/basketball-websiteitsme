@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Aleksander Balcerowski - Player Profile</title>
+  <link rel="stylesheet" href="../style.css">
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 20px;
+    }
+
+    .player-header {
+      display: flex;
+      align-items: center;
+      gap: 15px;
+      margin-bottom: 20px;
+    }
+
+    .player-header img {
+      width: 100px;
+      height: auto;
+      border-radius: 6px;
+      border: 1px solid #ccc;
+    }
+
+    .player-info {
+      margin-bottom: 30px;
+    }
+
+    .stats, .games {
+      margin-top: 20px;
+    }
+
+    h2 {
+      margin-top: 30px;
+      border-bottom: 2px solid #ddd;
+      padding-bottom: 5px;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 10px;
+    }
+
+    table th, table td {
+      padding: 8px;
+      border: 1px solid #ddd;
+      text-align: left;
+    }
+
+    table th {
+      background: #f2f2f2;
+    }
+
+    .game-list li {
+      margin: 5px 0;
+      padding: 6px;
+      border-radius: 6px;
+      background: #f4f4f4;
+    }
+
+    .game-list li a {
+      text-decoration: none;
+      color: #333;
+    }
+  </style>
+</head>
+<body>
+  <!-- Player Header -->
+  <div class="player-header">
+    <img src="../images/balcerowski.png" alt="Aleksander Balcerowski">
+    <h1>Aleksander Balcerowski</h1>
+  </div>
+
+  <!-- Player Info -->
+  <div class="player-info">
+    <p><strong>Nationality:</strong> Poland</p>
+    <p><strong>Born:</strong> November 19, 2000 (Świdnica, Poland)</p>
+    <p><strong>Height:</strong> 2.15 m (7 ft 1 in)</p>
+    <p><strong>Position:</strong> Center</p>
+    <p><strong>Current Team:</strong> Panathinaikos (EuroLeague)</p>
+  </div>
+
+  <!-- Stats -->
+  <div class="stats">
+    <h2>Player Stats (Recent Competitions)</h2>
+    <table>
+      <tr>
+        <th>Competition</th>
+        <th>Games</th>
+        <th>PPG</th>
+        <th>RPG</th>
+        <th>BPG</th>
+      </tr>
+      <tr>
+        <td>EuroBasket 2022</td>
+        <td>6</td>
+        <td>10.2</td>
+        <td>4.3</td>
+        <td>1.2</td>
+      </tr>
+      <tr>
+        <td>World Cup 2023</td>
+        <td>5</td>
+        <td>9.8</td>
+        <td>5.1</td>
+        <td>1.0</td>
+      </tr>
+    </table>
+  </div>
+
+  <!-- Games -->
+  <div class="games">
+    <h2>Recent Games</h2>
+    <ul class="game-list">
+      <li><a href="../games/game2.html">Poland vs Finland – Aug 17, 2025</a></li>
+      <li><a href="../games/game1.html">Poland vs Latvia – Jul 25, 2025</a></li>
+      <li><a href="../games/game5.html">Germany vs Poland – Jun 14, 2025</a></li>
+    </ul>
+  </div>
+
+  <!-- Back to Index -->
+  <p><a href="../index.html">← Back to Archive</a></p>
+</body>
+</html>
