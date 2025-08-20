@@ -1,161 +1,313 @@
-/* General Page Style */
-body {
-  font-family: Arial, sans-serif;
-  max-width: 900px;
-  margin: 20px auto;
-  padding: 20px;
-  background-color: #f5f5f5;
-  color: #222;
-}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Basketball Game Results</title>
+    <style>
+        /* General Page Style */
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 900px;
+            margin: 20px auto;
+            padding: 20px;
+            background-color: #f5f5f5;
+            color: #222;
+        }
 
-/* Headings */
-h1, h2 {
-  text-align: center;
-  margin-bottom: 15px;
-  color: #333;
-}
+        /* Headings */
+        h1, h2 {
+            text-align: center;
+            margin-bottom: 15px;
+            color: #333;
+        }
 
-/* Filter Section */
-.filter-section {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  flex-wrap: wrap;
-  gap: 10px;
-  margin-bottom: 20px;
-}
+        /* Filter Section */
+        .filter-section {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin-bottom: 20px;
+        }
 
-.filter-section label {
-  font-weight: bold;
-}
+        .filter-section label {
+            font-weight: bold;
+        }
 
-.filter-section select,
-.filter-section input {
-  padding: 6px 10px;
-  font-size: 14px;
-  border-radius: 4px;
-  border: 1px solid #ccc;
-}
+        .filter-section select,
+        .filter-section input {
+            padding: 6px 10px;
+            font-size: 14px;
+            border-radius: 4px;
+            border: 1px solid #ccc;
+        }
 
-/* Search Section */
-.search-container {
-  max-width: 600px;
-  margin: 0 auto 20px auto;
-  text-align: center;
-}
+        /* Search Section */
+        .search-container {
+            max-width: 600px;
+            margin: 0 auto 20px auto;
+            text-align: center;
+        }
 
-.search-container input {
-  width: 70%;
-  padding: 8px;
-  border-radius: 4px;
-  border: 1px solid #ccc;
-}
+        .search-container input {
+            width: 70%;
+            padding: 8px;
+            border-radius: 4px;
+            border: 1px solid #ccc;
+        }
 
-.search-container button {
-  padding: 8px 12px;
-  margin-left: 5px;
-  border-radius: 4px;
-  border: none;
-  background-color: #0077cc;
-  color: white;
-  cursor: pointer;
-}
+        .search-container button {
+            padding: 8px 12px;
+            margin-left: 5px;
+            border-radius: 4px;
+            border: none;
+            background-color: #0077cc;
+            color: white;
+            cursor: pointer;
+        }
 
-.search-container button:hover {
-  background-color: #005fa3;
-}
+        .search-container button:hover {
+            background-color: #005fa3;
+        }
 
-/* Game List Cards */
-.game-list, .search-results {
-  background: #fff;
-  border-radius: 8px;
-  padding: 20px;
-  margin: 20px auto;
-  box-shadow: 0 2px 5px rgba(0,0,0,0.1);
-  max-width: 800px;
-}
+        /* Game List Cards */
+        .game-list, .search-results {
+            background: #fff;
+            border-radius: 8px;
+            padding: 20px;
+            margin: 20px auto;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+            max-width: 800px;
+        }
 
-.game-list h2, .search-results h2 {
-  margin-top: 0;
-}
+        .game-list h2, .search-results h2 {
+            margin-top: 0;
+        }
 
-/* Individual Game Item */
-li.game-item {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  padding: 10px;
-  margin: 10px 0;
-  border-radius: 6px;
-  background-color: #f9f9f9;
-  border: 1px solid #ddd;
-}
+        /* Individual Game Item */
+        li.game-item {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 10px;
+            margin: 10px 0;
+            border-radius: 6px;
+            background-color: #f9f9f9;
+            border: 1px solid #ddd;
+            list-style-type: none;
+        }
 
-li.game-item a {
-  color: #0077cc;
-  font-weight: bold;
-  text-decoration: none;
-}
+        li.game-item a {
+            color: #0077cc;
+            font-weight: bold;
+            text-decoration: none;
+        }
 
-li.game-item a:hover {
-  text-decoration: underline;
-}
+        li.game-item a:hover {
+            text-decoration: underline;
+        }
 
-/* Competition Logo */
-.competition-logo {
-  height: 40px;
-  width: auto;
-  margin-right: 15px;
-}
+        /* Competition Logo */
+        .competition-logo {
+            height: 40px;
+            width: auto;
+            margin-right: 15px;
+        }
 
-/* Teams + Score inside a game-item */
-.game-info {
-  display: flex;
-  align-items: center;
-  gap: 10px;
-  flex-wrap: wrap;
-}
+        /* Teams + Score inside a game-item */
+        .game-info {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            flex-wrap: wrap;
+        }
 
-/* Responsive adjustments */
-@media screen and (max-width: 600px) {
-  .filter-section {
-    flex-direction: column;
-  }
-  .game-info {
-    flex-direction: column;
-    align-items: flex-start;
-  }
-  .search-container input {
-    width: 100%;
-    margin-bottom: 10px;
-  }
-  .search-container button {
-    width: 100%;
-  }
-}
-HTML structure example (for index.html or a game list section)
-html
-Kopieren
-Bearbeiten
-<div class="filter-section">
-  <label for="gameDate">Select Date:</label>
-  <input type="date" id="gameDate">
-</div>
+        .score {
+            font-weight: bold;
+            color: #333;
+            margin-left: 10px;
+        }
 
-<ul class="game-list" id="dateResults">
-  <li class="game-item">
-    <div class="game-info">
-      <img class="competition-logo" src="images/Fibafriendly.png" alt="Friendly">
-      <span>Poland vs Finland</span>
+        /* Responsive adjustments */
+        @media screen and (max-width: 600px) {
+            .filter-section {
+                flex-direction: column;
+            }
+            .game-info {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+            .search-container input {
+                width: 100%;
+                margin-bottom: 10px;
+            }
+            .search-container button {
+                width: 100%;
+                margin-left: 0;
+            }
+        }
+
+        .no-results {
+            text-align: center;
+            padding: 20px;
+            color: #666;
+            font-style: italic;
+        }
+    </style>
+</head>
+<body>
+    <h1>Basketball Game Results</h1>
+    
+    <div class="search-container">
+        <input type="text" id="searchInput" placeholder="Search for teams...">
+        <button id="searchButton">Search</button>
     </div>
-    <span>78 - 70</span>
-  </li>
-
-  <li class="game-item">
-    <div class="game-info">
-      <img class="competition-logo" src="images/Fibafriendly.png" alt="Friendly">
-      <span>Slovenia vs Great Britain</span>
+    
+    <div class="filter-section">
+        <label for="competitionFilter">Filter by Competition:</label>
+        <select id="competitionFilter">
+            <option value="all">All Competitions</option>
+            <option value="fiba">FIBA Friendly</option>
+            <option value="euroleague">EuroLeague</option>
+            <option value="nba">NBA</option>
+        </select>
+        
+        <label for="gameDate">Select Date:</label>
+        <input type="date" id="gameDate">
     </div>
-    <span>85 - 81</span>
-  </li>
-</ul>
+    
+    <div class="game-list">
+        <h2>Recent Games</h2>
+        <ul id="gameResults">
+            <li class="game-item" data-competition="fiba" data-date="2023-08-15">
+                <div class="game-info">
+                    <img class="competition-logo" src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSI0MCIgaGVpZ2h0PSI0MCIgdmlld0JveD0iMCAwIDQwIDQwIj48cmVjdCB3aWR0aD0iNDAiIGhlaWdodD0iNDAiIGZpbGw9IiMwMDc3Y2MiLz48dGV4dCB4PSIyMCIgeT0iMjUiIGZvbnQtZmFtaWx5PSJBcmlhbCIgZm9udC1zaXplPSIxNCIgZmlsbD0id2hpdGUiIHRleHQtYW5jaG9yPSJtaWRkbGUiPkZJQkE8L3RleHQ+PC9zdmc+" alt="FIBA Friendly">
+                    <span>Poland vs Finland</span>
+                </div>
+                <span class="score">78 - 70</span>
+            </li>
+            
+            <li class="game-item" data-competition="fiba" data-date="2023-08-14">
+                <div class="game-info">
+                    <img class="competition-logo" src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSI0MCIgaGVpZ2h0PSI0MCIgdmlld0JveD0iMCAwIDQwIDQwIj48cmVjdCB3aWR0aD0iNDAiIGhlaWdodD0iNDAiIGZpbGw9IiMwMDc3Y2MiLz48dGV4dCB4PSIyMCIgeT0iMjUiIGZvbnQtZmFtaWx5PSJBcmlhbCIgZm9udC1zaXplPSIxNCIgZmlsbD0id2hpdGUiIHRleHQtYW5jaG9yPSJtaWRkbGUiPkZJQkE8L3RleHQ+PC9zdmc+" alt="FIBA Friendly">
+                    <span>Slovenia vs Great Britain</span>
+                </div>
+                <span class="score">85 - 81</span>
+            </li>
+            
+            <li class="game-item" data-competition="euroleague" data-date="2023-08-13">
+                <div class="game-info">
+                    <img class="competition-logo" src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSI0MCIgaGVpZ2h0PSI0MCIgdmlld0JveD0iMCAwIDQwIDQwIj48cmVjdCB3aWR0aD0iNDAiIGhlaWdodD0iNDAiIGZpbGw9IiNmZjAwMDAiLz48dGV4dCB4PSIyMCIgeT0iMjUiIGZvbnQtZmFtaWx5PSJBcmlhbCIgZm9udC1zaXplPSIxMCIgZmlsbD0id2hpdGUiIHRleHQtYW5jaG9yPSJtaWRkbGUiPkV1cm9MdWc8L3RleHQ+PC9zdmc+" alt="EuroLeague">
+                    <span>Real Madrid vs Barcelona</span>
+                </div>
+                <span class="score">92 - 88</span>
+            </li>
+            
+            <li class="game-item" data-competition="nba" data-date="2023-08-12">
+                <div class="game-info">
+                    <img class="competition-logo" src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSI0MCIgaGVpZ2h0PSI0MCIgdmlld0JveD0iMCAwIDQwIDQwIj48cmVjdCB3aWR0aD0iNDAiIGhlaWdodD0iNDAiIGZpbGw9IiNmZmFhMDAiLz48dGV4dCB4PSIyMCIgeT0iMjUiIGZvbnQtZmFtaWx5PSJBcmlhbCIgZm9udC1zaXplPSIxNCIgZmlsbD0id2hpdGUiIHRleHQtYW5jaG9yPSJtaWRkbGUiPk5CQTwvdGV4dD48L3N2Zz4=" alt="NBA">
+                    <span>Lakers vs Celtics</span>
+                </div>
+                <span class="score">105 - 98</span>
+            </li>
+        </ul>
+    </div>
+    
+    <div class="search-results" id="searchResults" style="display: none;">
+        <h2>Search Results</h2>
+        <ul id="searchResultsList"></ul>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Get DOM elements
+            const searchInput = document.getElementById('searchInput');
+            const searchButton = document.getElementById('searchButton');
+            const competitionFilter = document.getElementById('competitionFilter');
+            const gameDate = document.getElementById('gameDate');
+            const gameResults = document.getElementById('gameResults');
+            const searchResults = document.getElementById('searchResults');
+            const searchResultsList = document.getElementById('searchResultsList');
+            const gameItems = document.querySelectorAll('.game-item');
+            
+            // Set today's date as default
+            const today = new Date();
+            const formattedDate = today.toISOString().substr(0, 10);
+            gameDate.value = formattedDate;
+            
+            // Search functionality
+            searchButton.addEventListener('click', performSearch);
+            searchInput.addEventListener('keyup', function(event) {
+                if (event.key === 'Enter') {
+                    performSearch();
+                }
+            });
+            
+            // Filter functionality
+            competitionFilter.addEventListener('change', filterGames);
+            gameDate.addEventListener('change', filterGames);
+            
+            function performSearch() {
+                const searchTerm = searchInput.value.toLowerCase().trim();
+                
+                if (searchTerm === '') {
+                    // If search is empty, show all games and hide search results
+                    searchResults.style.display = 'none';
+                    gameResults.parentElement.style.display = 'block';
+                    return;
+                }
+                
+                // Filter games based on search term
+                const filteredGames = Array.from(gameItems).filter(game => {
+                    const gameText = game.textContent.toLowerCase();
+                    return gameText.includes(searchTerm);
+                });
+                
+                // Display search results
+                displaySearchResults(filteredGames, searchTerm);
+            }
+            
+            function displaySearchResults(games, searchTerm) {
+                searchResultsList.innerHTML = '';
+                
+                if (games.length === 0) {
+                    searchResultsList.innerHTML = '<li class="no-results">No games found for "' + searchTerm + '"</li>';
+                } else {
+                    games.forEach(game => {
+                        const clone = game.cloneNode(true);
+                        searchResultsList.appendChild(clone);
+                    });
+                }
+                
+                // Show search results, hide main list
+                searchResults.style.display = 'block';
+                gameResults.parentElement.style.display = 'none';
+            }
+            
+            function filterGames() {
+                const competition = competitionFilter.value;
+                const date = gameDate.value;
+                
+                gameItems.forEach(game => {
+                    const gameCompetition = game.getAttribute('data-competition');
+                    const gameDate = game.getAttribute('data-date');
+                    
+                    const competitionMatch = competition === 'all' || gameCompetition === competition;
+                    const dateMatch = date === '' || gameDate === date;
+                    
+                    if (competitionMatch && dateMatch) {
+                        game.style.display = 'flex';
+                    } else {
+                        game.style.display = 'none';
+                    }
+                });
+            }
+            
+            // Initial filter on page load
+            filterGames();
+        });
+    </script>
+</body>
+</html>
