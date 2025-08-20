@@ -1,24 +1,59 @@
-const searchBox = document.getElementById('searchBox');
-const searchResults = document.getElementById('searchResults');
+// --- DATA --- //
+const data = {
+  teams: [
+    { name: "Poland", url: "teams/Poland.html" },
+    { name: "Finland", url: "teams/Finland.html" },
+    { name: "Slovenia", url: "teams/Slovenia.html" },
+    { name: "Great Britain", url: "teams/Great_Britain.html" }
+  ],
+  players: [
+    { name: "Aleksander Balcerowski", url: "players/Aleksander_Balcerowski.html" },
+    { name: "Lauri Markkanen", url: "players/Lauri_Markkanen.html" }
+  ],
+  competitions: [
+    { name: "FIBA Friendly", url: "competitions/Fibafriendly.html" },
+    { name: "EuroBasket 2025", url: "competitions/eurobasket.html" },
+    { name: "World Cup Qualifiers", url: "competitions/worldcup.html" }
+  ],
+  games: [
+    { name: "Poland vs Finland", date: "2025-08-17", link: "games/game2.html" },
+    { name: "Slovenia vs Great Britain", date: "2025-08-17", link: "games/game3.html" },
+    { name: "Latvia vs Slovenia", date: "2025-08-16", link: "games/game4.html" }
+  ]
+};
 
-// List of games
-const games = [
-  {name: 'Team A vs Team B', link: 'games/game1.html'},
-  {name: 'Team C vs Team D', link: 'games/game2.html'},
-  {name: 'Team E vs Team F', link: 'games/game3.html'}
-];
+// --- ELEMENT REFERENCES --- //
+const searchBox = document.getElementById("searchInput");
+const searchResultsContainer = document.getElementById("resultsList");
 
-searchBox.addEventListener('input', () => {
-  const query = searchBox.value.toLowerCase();
-  searchResults.innerHTML = '';
-  games.forEach(game => {
-    if (game.name.toLowerCase().includes(query)) {
-      const li = document.createElement('li');
-      const a = document.createElement('a');
-      a.href = game.link;
-      a.textContent = game.name;
-      li.appendChild(a);
-      searchResults.appendChild(li);
-    }
+// --- SEARCH FUNCTION --- //
+function performSearch() {
+  const query = searchBox.value.toLowerCase().trim();
+  searchResultsContainer.innerHTML = "";
+
+  if (!query) return;
+
+  let found = false;
+
+  ["teams", "players", "competitions", "games"].forEach(category => {
+    data[category].forEach(item => {
+      if (item.name.toLowerCase().includes(query)) {
+        const li = document.createElement("li");
+        li.classList.add("game-item");
+
+        const a = document.createElement("a");
+        a.href = item.url || item.link;
+        a.textContent = `${item.name} (${category})`;
+
+        li.appendChild(a);
+        searchResultsContainer.appendChild(li);
+        found = true;
+      }
+    });
   });
-});
+
+  document.getElementById("searchResults").style.display = found ? "block" : "none";
+}
+
+// --- EVENT LISTENER --- //
+searchBox.addEventListener("input", performSearch);
